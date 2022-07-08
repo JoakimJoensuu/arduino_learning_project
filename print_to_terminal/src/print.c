@@ -28,15 +28,16 @@ int main(void)
     while (1)
     {
 
-        PORTB |= _BV(PORTB5);
-
-        while (!(UCSR0A & (1 << UDRE0)))
-            ;
+        //PORTB |= _BV(PORTB5);
 
         // load data into transmit register
         //UDR0 = 'F';
         //USART_IO_DATA_REGISTER = 'F';
         USART_send_string("moi");
+        
+        unsigned char buffer[20];
+        USART_read_line(buffer, 20);
+        USART_send_string(buffer);
 
         PORTB &= ~_BV(PORTB5);
     }
