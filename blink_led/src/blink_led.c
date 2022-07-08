@@ -1,6 +1,7 @@
 #define __AVR_ATmega329P__
 #include <avr/io.h>
 #include <util/delay.h>
+#include "../../util.c"
 
 #define MS_DELAY 1000
 #define MESSAGE "SOS"
@@ -73,7 +74,8 @@ int main(void)
 {
     /*Set to one the fifth bit of DDRB to one
     **Set digital pin 13 to output mode */
-    DDRB |= _BV(DDB5);
+    //DDRB |= _BV(DDB5);
+    SET_HIGH(DDRB, 5);
 
     while (1)
     {
@@ -88,7 +90,8 @@ int main(void)
                 switch (morse_char)
                 {
                 case '-':
-                    PORTB |= _BV(PORTB5);
+                    //PORTB |= _BV(PORTB5);
+                    SET_HIGH(PORTB, 5);
                     _delay_ms(400);
                     break;
                 case '.':
@@ -105,7 +108,8 @@ int main(void)
                     }
                     break;
                 }
-                PORTB &= ~_BV(PORTB5);
+                //PORTB &= ~_BV(PORTB5);
+                SET_LOW(PORTB, 5);
                 _delay_ms(200);
             }
 
