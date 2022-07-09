@@ -42,8 +42,13 @@ int main(void)
 
         if (last_button_state && !button_state)
         {
-            USART_send_string("Led is on!\n\n");
+            
             TOGGLE_BIT(PORTB, 0);
+
+            if (PORTB & (1 << 0))
+                USART_send_string("Led is on\n");
+            else
+                USART_send_string("Led is off!\n");
         }
     }
 }

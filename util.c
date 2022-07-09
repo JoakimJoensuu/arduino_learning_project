@@ -41,3 +41,4 @@ void USART_read_line(unsigned char* buf, uint8_t buffer_size)
     }
     buf[index] = 0;
 }
+
